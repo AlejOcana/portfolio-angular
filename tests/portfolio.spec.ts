@@ -94,3 +94,64 @@ test.describe('Portfolio Website', () => {
     await expect(page.getByText(/Senior Full-Stack Engineer with 10\+ years/)).toBeVisible();
   });
 });
+
+test.describe('Portfolio Website - Mobile', () => {
+  test.use({ viewport: { width: 375, height: 667 } });
+
+  test('hamburger menu opens and closes', async ({ page }) => {
+    await page.goto('/');
+    
+    const toggle = page.locator('.navbar-toggle');
+    await expect(toggle).toBeVisible();
+    
+    await toggle.click();
+    await expect(page.locator('.navbar-nav.open')).toBeVisible();
+    
+    await page.locator('.navbar-backdrop').click();
+    await expect(page.locator('.navbar-nav.open')).not.toBeVisible();
+  });
+
+  test('mobile menu has all navigation links', async ({ page }) => {
+    await page.goto('/');
+    
+    await page.locator('.navbar-toggle').click();
+    
+    await expect(page.locator('.nav-link', { hasText: 'About' })).toBeVisible();
+    await expect(page.locator('.nav-link', { hasText: 'Experience' })).toBeVisible();
+    await expect(page.locator('.nav-link', { hasText: 'Projects' })).toBeVisible();
+    await expect(page.locator('.nav-link', { hasText: 'Tech Stack' })).toBeVisible();
+    await expect(page.locator('.nav-cta')).toBeVisible();
+  });
+
+  test('mobile menu closes when clicking nav link', async ({ page }) => {
+    await page.goto('/');
+    
+    await page.locator('.navbar-toggle').click();
+    await expect(page.locator('.navbar-nav.open')).toBeVisible();
+    
+    await page.locator('.nav-link', { hasText: 'About' }).click();
+    await page.waitForTimeout(300);
+    await expect(page.locator('.navbar-nav.open')).not.toBeVisible();
+  });
+
+  test('mobile menu closes when clicking Get in Touch', async ({ page }) => {
+    await page.goto('/');
+    
+    await page.locator('.navbar-toggle').click();
+    await expect(page.locator('.navbar-nav.open')).toBeVisible();
+    
+    await page.locator('.nav-cta').click();
+    await page.waitForTimeout(300);
+    await expect(page.locator('.navbar-nav.open')).not.toBeVisible();
+  });
+
+  test('page is responsive on mobile viewport', async ({ page }) => {
+    await page.goto('/');
+    
+    const navbar = page.locator('.navbar');
+    await expect(navbar).toBeVisible();
+    
+    await expect(page.locator('h1')).toBeVisible();
+    await expect(page.locator('.hero-actions')).toBeVisible();
+  });
+});
