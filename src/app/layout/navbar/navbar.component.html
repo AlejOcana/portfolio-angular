@@ -1,0 +1,27 @@
+<header class="navbar">
+  <div class="navbar-container">
+    <a href="#top" class="navbar-logo" (click)="closeMenu()">
+      AO
+    </a>
+
+    <nav class="navbar-nav" [class.open]="isMenuOpen()">
+      <a 
+        *ngFor="let link of navLinks" 
+        [href]="link.href"
+        class="nav-link"
+        (click)="closeMenu()"
+      >
+        {{ link.label }}
+      </a>
+      <button class="nav-cta" (click)="scrollToContact()">
+        Get in Touch
+      </button>
+    </nav>
+
+    <button class="navbar-toggle" (click)="toggleMenu()" [attr.aria-expanded]="isMenuOpen()" aria-label="Toggle menu">
+      <app-icon [name]="isMenuOpen() ? 'x' : 'menu'" [size]="24"></app-icon>
+    </button>
+  </div>
+</header>
+
+<div class="navbar-backdrop" [class.visible]="isMenuOpen()" (click)="closeMenu()"></div>

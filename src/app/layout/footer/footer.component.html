@@ -1,0 +1,28 @@
+<footer id="contact" class="footer">
+  <div class="footer-container">
+    <div class="footer-content">
+      <h2 class="footer-title">Let's Connect</h2>
+      <p class="footer-subtitle">I'm always open to discussing new projects or opportunities.</p>
+      
+      <div class="footer-links">
+        <a [href]="personalInfo.github" target="_blank" rel="noopener" class="footer-link" aria-label="GitHub">
+          <app-icon name="github" [size]="20"></app-icon>
+          GitHub
+        </a>
+        <a [href]="personalInfo.linkedin" target="_blank" rel="noopener" class="footer-link" aria-label="LinkedIn">
+          <app-icon name="linkedin" [size]="20"></app-icon>
+          LinkedIn
+        </a>
+        <a [href]="'mailto:' + personalInfo.email" class="footer-link" aria-label="Email">
+          <app-icon name="mail" [size]="20"></app-icon>
+          Email
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; {{ currentYear }} {{ personalInfo.name }}. All rights reserved.</p>
+      <p class="footer-built">Built with Angular + TypeScript + SCSS</p>
+    </div>
+  </div>
+</footer>

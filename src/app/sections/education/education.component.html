@@ -1,0 +1,26 @@
+<section id="education" class="education section">
+  <div class="education-container">
+    <div class="education-header">
+      <h2 class="section-title">Education & Certifications</h2>
+    </div>
+
+    <div class="education-grid" @staggerIn>
+      <div class="education-column">
+        <h3 class="column-title">Education</h3>
+        <div *ngFor="let edu of education" class="edu-item">
+          <h4 class="edu-degree">{{ edu.degree }}</h4>
+          <p class="edu-institution">{{ edu.institution }}</p>
+          <span class="edu-period">{{ edu.period }}</span>
+          <p class="edu-desc">{{ edu.description }}</p>
+        </div>
+      </div>
+
+      <div class="certifications-column">
+        <h3 class="column-title">Certifications</h3>
+        <ul class="cert-list">
+          <li *ngFor="let cert of certifications" class="cert-item">{{ cert }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

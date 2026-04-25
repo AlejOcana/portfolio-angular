@@ -1,0 +1,15 @@
+<section id="approach" class="approach section">
+  <div class="approach-container">
+    <div class="approach-header">
+      <h2 class="section-title">Technical Approach</h2>
+      <p class="approach-subtitle">Core principles that guide my work</p>
+    </div>
+
+    <div class="approach-grid" @staggerIn>
+      <div *ngFor="let principle of principles" class="approach-card">
+        <h3 class="card-title">{{ principle.title }}</h3>
+        <p class="card-description">{{ principle.description }}</p>
+      </div>
+    </div>
+  </div>
+</section>
