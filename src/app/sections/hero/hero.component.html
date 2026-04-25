@@ -1,0 +1,38 @@
+<section id="top" class="hero">
+  <div class="hero-container">
+    <div class="hero-content" @fadeInUp>
+      <h1 class="hero-title">{{ personalInfo.name }}</h1>
+      <p class="hero-subtitle">{{ personalInfo.title }}</p>
+      <p class="hero-tagline" [class.typing]="isTyping">{{ displayedSubtitle() }}<span class="cursor" [class.hidden]="!isTyping">|</span></p>
+      
+      <div class="hero-actions">
+        <button class="btn-primary" (click)="scrollToProjects()">
+          View Projects
+          <app-icon name="arrowRight" [size]="18"></app-icon>
+        </button>
+        <button class="btn-secondary" (click)="scrollToContact()">
+          Get in Touch
+        </button>
+      </div>
+    </div>
+
+    <div class="hero-terminal" @fadeInUp>
+      <div class="terminal-header">
+        <span class="terminal-dot"></span>
+        <span class="terminal-dot"></span>
+        <span class="terminal-dot"></span>
+      </div>
+<div class="terminal-body">
+  <pre><code><span class="terminal-keyword">const</span> <span class="terminal-var">developer</span> = {{ '{' }}
+  <span class="terminal-property">name</span>: <span class="terminal-string">"{{ personalInfo.name }}"</span>,
+  <span class="terminal-property">title</span>: <span class="terminal-string">"{{ personalInfo.title }}"</span>,
+  <span class="terminal-property">location</span>: <span class="terminal-string">"{{ personalInfo.location }}"</span>
+{{ '}' }}</code></pre>
+</div>
+    </div>
+
+    <button class="hero-scroll" (click)="scrollDown()" aria-label="Scroll down">
+      <app-icon name="chevronDown" [size]="24"></app-icon>
+    </button>
+  </div>
+</section>

@@ -1,0 +1,23 @@
+<section id="experience" class="experience section">
+  <div class="experience-container">
+    <div class="experience-header">
+      <h2 class="section-title">Experience</h2>
+    </div>
+
+    <div class="timeline" @staggerIn>
+      <div *ngFor="let exp of experience; let last = last" class="experience-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <div class="exp-header">
+            <h3 class="exp-company">{{ exp.company }}</h3>
+            <span class="exp-period">{{ exp.period }}</span>
+          </div>
+          <p class="exp-role">{{ exp.role }}</p>
+          <ul class="exp-highlights">
+            <li *ngFor="let highlight of exp.highlights">{{ highlight }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

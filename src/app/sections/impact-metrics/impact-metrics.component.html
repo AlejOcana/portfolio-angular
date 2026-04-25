@@ -1,0 +1,11 @@
+<section id="impact" class="impact">
+  <div class="impact-container">
+    <div class="impact-grid">
+      <div *ngFor="let metric of metrics; let i = index" class="impact-card" @fadeIn [style.animation-delay]="(i * 100) + 'ms'">
+        <span class="impact-value">{{ metric.value }}</span>
+        <span class="impact-label">{{ metric.label }}</span>
+        <span class="impact-desc">{{ metric.description }}</span>
+      </div>
+    </div>
+  </div>
+</section>

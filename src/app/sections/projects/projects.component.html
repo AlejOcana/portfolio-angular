@@ -1,0 +1,52 @@
+<section id="projects" class="projects section">
+  <div class="projects-container">
+    <div class="projects-header">
+      <h2 class="section-title">Featured Projects</h2>
+    </div>
+
+    <div class="projects-grid" @staggerIn>
+      <div *ngFor="let project of projects" class="project-card" [class.coming-soon]="project.comingSoon">
+        <div class="project-header">
+          <h3 class="project-name">{{ project.name }}</h3>
+          <span *ngIf="project.comingSoon" class="coming-badge">Coming Soon</span>
+        </div>
+        <p class="project-tagline">{{ project.tagline }}</p>
+        <p class="project-description">{{ project.description }}</p>
+        
+        <div class="project-stack" *ngIf="!project.comingSoon">
+          <span *ngFor="let tech of project.stack" class="tech-tag">{{ tech }}</span>
+        </div>
+        
+        <div class="project-metrics" *ngIf="!project.comingSoon">
+          <span class="metric-label">Metrics:</span>
+          <span class="metric-value">{{ project.metrics }}</span>
+        </div>
+
+        <div class="project-highlights" *ngIf="!project.comingSoon">
+          <h4>Key Highlights:</h4>
+          <ul>
+            <li *ngFor="let highlight of project.highlights">{{ highlight }}</li>
+          </ul>
+        </div>
+
+        <div class="project-links" *ngIf="!project.comingSoon && project.id !== 'portfolio'">
+          <a [href]="project.demoUrl" target="_blank" rel="noopener" class="project-link">
+            <app-icon name="external" [size]="16"></app-icon>
+            Demo
+          </a>
+          <a [href]="project.githubUrl" target="_blank" rel="noopener" class="project-link">
+            <app-icon name="github" [size]="16"></app-icon>
+            Code
+          </a>
+        </div>
+
+        <div class="project-links" *ngIf="!project.comingSoon && project.id === 'portfolio'">
+          <a [href]="project.githubUrl" target="_blank" rel="noopener" class="project-link">
+            <app-icon name="github" [size]="16"></app-icon>
+            Code
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

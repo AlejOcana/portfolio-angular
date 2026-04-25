@@ -1,0 +1,17 @@
+<section id="stack" class="tech-stack section">
+  <div class="tech-stack-container">
+    <div class="tech-stack-header">
+      <h2 class="section-title">Tech Stack</h2>
+      <p class="tech-stack-subtitle">Technologies I work with</p>
+    </div>
+
+    <div class="tech-stack-grid" @staggerIn>
+      <div *ngFor="let category of categories" class="stack-category">
+        <h3 class="category-title">{{ category.label }}</h3>
+        <ul class="category-list">
+          <li *ngFor="let item of category.items">{{ item }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
