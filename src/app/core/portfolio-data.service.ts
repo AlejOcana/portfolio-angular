@@ -130,25 +130,25 @@ Open to remote opportunities where I can contribute to meaningful projects.`,
         ],
       },
       {
-        company: 'Affinity Solutions S.L.',
-        role: 'Software Engineer, Analyst & Team Leader',
-        period: 'July 2017 - September 2021',
-        highlights: [
-          'Led team of 5+ developers',
-          'Custom software for ERP, CRM, POS, BI, eCommerce integrations',
-          'RESTful API development',
-          'Data migration and architectural restructuring',
-        ],
-      },
-      {
         company: 'CGI Inc. Spain',
         role: 'IT Project Manager',
         period: 'September 2021 - June 2022',
         highlights: [
-          'Managed team of 15+ developers',
+          'Managed 10+ developers divided into several teams',
           'Project planning with Microsoft Project',
           'Stakeholder communication and presales',
           'Agile methodologies with JIRA',
+        ],
+      },
+      {
+        company: 'Affinity Solutions S.L.',
+        role: 'Software Engineer & Tech Lead',
+        period: 'July 2017 - September 2021',
+        highlights: [
+          'Tech Lead for ERP, CRM, POS, BI, eCommerce integrations',
+          'Custom software development',
+          'RESTful API development',
+          'Data migration and architectural restructuring',
         ],
       },
     ];
