@@ -24,31 +24,34 @@
   }
 }
 
-.project {
-  &-card {
-    padding: 1.5rem;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 0.75rem;
-    transition: all 0.3s ease;
+.project-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: 1.5rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  transition: all 0.3s ease;
 
-    &:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    }
-
-    &.coming-soon {
-      opacity: 0.7;
-      background: repeating-linear-gradient(
-        45deg,
-        var(--card),
-        var(--card) 10px,
-        var(--background) 10px,
-        var(--background) 20px
-      );
-    }
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   }
 
+  &.coming-soon {
+    opacity: 0.7;
+    background: repeating-linear-gradient(
+      45deg,
+      var(--card),
+      var(--card) 10px,
+      var(--background) 10px,
+      var(--background) 20px
+    );
+  }
+}
+
+.project {
   &-header {
     display: flex;
     justify-content: space-between;
@@ -89,6 +92,7 @@
 
   &-highlights {
     margin-bottom: 1rem;
+    flex: 1;
 
     h4 {
       font-size: 0.875rem;
@@ -111,7 +115,7 @@
   &-links {
     display: flex;
     gap: 1rem;
-    margin-top: 1rem;
+    margin-top: auto;
     padding-top: 1rem;
     border-top: 1px solid var(--border);
   }
