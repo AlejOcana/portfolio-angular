@@ -182,6 +182,18 @@ Open to remote opportunities where I can contribute to meaningful projects.`,
   getProjects(): Project[] {
     return [
       {
+        id: 'performance-lab-ang',
+        name: 'Performance Lab Angular',
+        tagline: 'Frontend optimization demo',
+        description: 'A high-performance dashboard demonstrating the difference between unoptimized and optimized Angular implementations. Features virtual scrolling, lazy loading with @defer, signals, and Chart.js visualizations.',
+        stack: ['Angular 21', 'TypeScript', 'SCSS', 'Chart.js', 'Angular CDK'],
+        metrics: 'Virtual scrolling for 10K+ rows',
+        highlights: ['@defer lazy loading', 'Virtual scrolling with CDK', 'Signals for state management', 'Responsive design'],
+        demoUrl: 'https://alejocana.github.io/performance-lab-ang',
+        githubUrl: 'https://github.com/AlejOcana/performance-lab-ang',
+        comingSoon: false,
+      },
+      {
         id: 'portfolio',
         name: 'Professional Portfolio',
         tagline: 'This website',
