@@ -5,8 +5,8 @@ Senior Full-Stack Engineer portfolio website built with Angular 21 and SCSS.
 ## Quick Start
 
 ```bash
-npm install
-npm start
+pnpm install
+pnpm start
 ```
 
 Open [http://localhost:4200](http://localhost:4200) to view.
@@ -14,12 +14,12 @@ Open [http://localhost:4200](http://localhost:4200) to view.
 ## Available Scripts
 
 | Command | Description |
-|--------|-------------|
-| `npm start` | Start development server |
-| `npm run build` | Production build |
-| `npm run test:unit` | Run unit tests (Vitest) |
-| `npm run test:e2e` | Run Playwright E2E tests |
-| `npm run test:e2e:ui` | Run E2E tests with UI |
+|---------|-------------|
+| `pnpm start` | Start development server |
+| `pnpm run build` | Production build |
+| `pnpm run test:unit` | Run unit tests (Vitest) |
+| `pnpm run test:e2e` | Run Playwright E2E tests |
+| `pnpm run test:e2e:ui` | Run E2E tests with UI |
 
 ## Customization
 
@@ -95,7 +95,7 @@ src/
 Build for production:
 
 ```bash
-npm run build
+pnpm run build
 ```
 
 Deploy to any static hosting (Netlify, Vercel, Firebase Hosting, etc.).
