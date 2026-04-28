@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, style, animate, transition } from '@angular/animations';
-import { IconComponent } from '../../shared/components/icon/icon.component';
 import { PortfolioDataService } from '../../core/portfolio-data.service';
 import { PersonalInfo } from '../../core/portfolio.models';
 
 @Component({
   selector: 'app-about',
   standalone: true,
-  imports: [CommonModule, IconComponent],
+  imports: [CommonModule],
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss'],
   animations: [
