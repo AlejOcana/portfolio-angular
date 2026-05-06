@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IconComponent } from '../../shared/components/icon/icon.component';
 
@@ -11,6 +11,7 @@ import { IconComponent } from '../../shared/components/icon/icon.component';
 })
 export class NavbarComponent {
   isMenuOpen = signal(false);
+  isScrolled = signal(false);
 
   navLinks = [
     { label: 'About', href: '#about' },
@@ -33,5 +34,10 @@ export class NavbarComponent {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  }
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.isScrolled.set(window.scrollY > 50);
   }
 }

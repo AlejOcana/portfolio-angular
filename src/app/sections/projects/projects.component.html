@@ -1,11 +1,11 @@
 <section id="projects" class="projects section">
   <div class="projects-container">
     <div class="projects-header">
-      <h2 class="section-title">Featured Projects</h2>
+      <h2 class="section-title heading-gradient">Featured Projects</h2>
     </div>
 
     <div class="projects-grid" @staggerIn>
-      <div *ngFor="let project of projects" class="project-card" [class.coming-soon]="project.comingSoon">
+      <div *ngFor="let project of projects" class="project-card" appScrollReveal data-stagger="1" [class.coming-soon]="project.comingSoon">
         <div class="project-header">
           <h3 class="project-name">{{ project.name }}</h3>
           <span *ngIf="project.comingSoon" class="coming-badge">Coming Soon</span>
@@ -30,18 +30,18 @@
         </div>
 
         <div class="project-links" *ngIf="!project.comingSoon && project.id !== 'portfolio'">
-          <a [href]="project.demoUrl" target="_blank" rel="noopener" class="project-link">
+          <a *ngIf="project.demoUrl" [href]="project.demoUrl" target="_blank" rel="noopener noreferrer" class="project-link">
             <app-icon name="external" [size]="16"></app-icon>
             Demo
           </a>
-          <a [href]="project.githubUrl" target="_blank" rel="noopener" class="project-link">
+          <a [href]="project.githubUrl" target="_blank" rel="noopener noreferrer" class="project-link">
             <app-icon name="github" [size]="16"></app-icon>
             Code
           </a>
         </div>
 
         <div class="project-links" *ngIf="!project.comingSoon && project.id === 'portfolio'">
-          <a [href]="project.githubUrl" target="_blank" rel="noopener" class="project-link">
+          <a [href]="project.githubUrl" target="_blank" rel="noopener noreferrer" class="project-link">
             <app-icon name="github" [size]="16"></app-icon>
             Code
           </a>

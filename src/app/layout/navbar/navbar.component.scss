@@ -4,11 +4,24 @@
   left: 0;
   right: 0;
   background: var(--background);
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid transparent;
   z-index: 1100;
+  transition: all 0.3s ease;
 
   @media (prefers-color-scheme: dark) {
     background: var(--background-dark);
+  }
+
+  &.scrolled {
+    backdrop-filter: blur(12px);
+    background: rgba(9, 9, 11, 0.85);
+    border-bottom-color: var(--border);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    &.scrolled {
+      background: rgba(9, 9, 11, 0.85);
+    }
   }
 
   &-container {

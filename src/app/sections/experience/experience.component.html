@@ -1,11 +1,11 @@
 <section id="experience" class="experience section">
   <div class="experience-container">
     <div class="experience-header">
-      <h2 class="section-title">Experience</h2>
+      <h2 class="section-title heading-gradient">Experience</h2>
     </div>
 
     <div class="timeline" @staggerIn>
-      <div *ngFor="let exp of experience; let last = last" class="experience-item">
+      <div *ngFor="let exp of experience; let last = last" class="experience-item" appScrollReveal data-stagger="1">
         <div class="timeline-dot"></div>
         <div class="timeline-content">
           <div class="exp-header">

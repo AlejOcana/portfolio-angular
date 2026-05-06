@@ -1,7 +1,18 @@
 .footer {
+  position: relative;
   background: var(--card);
   border-top: 1px solid var(--border);
   padding: 4rem 0 2rem;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+  }
 
   &-container {
     max-width: var(--max-width);
@@ -48,12 +59,13 @@
     background: var(--background);
     border: 1px solid var(--border);
     border-radius: 0.5rem;
-    transition: all 0.2s ease;
+    transition: var(--transition-base);
 
     &:hover {
-      color: var(--foreground);
+      color: var(--accent);
       background: var(--muted);
       border-color: var(--muted);
+      transform: scale(1.1);
     }
 
     &:focus-visible {

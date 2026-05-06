@@ -33,7 +33,11 @@
     }
 
     @media (min-width: 1024px) {
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(3, 1fr);
+
+      .stack-category:first-child {
+        grid-column: span 2;
+      }
     }
   }
 }
@@ -43,11 +47,12 @@
   background: var(--background);
   border: 1px solid var(--border);
   border-radius: 0.75rem;
-  transition: all 0.3s ease;
+  transition: var(--transition-base);
+  cursor: pointer;
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
     border-color: var(--accent);
   }
 }

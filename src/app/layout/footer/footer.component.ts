@@ -1,4 +1,4 @@
-import { Component, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, PLATFORM_ID, inject } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { IconComponent } from '../../shared/components/icon/icon.component';
 import { PortfolioDataService } from '../../core/portfolio-data.service';
@@ -8,17 +8,17 @@ import { PortfolioDataService } from '../../core/portfolio-data.service';
   standalone: true,
   imports: [CommonModule, IconComponent],
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss']
+  styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent {
+  private dataService = inject(PortfolioDataService);
+  private platformId = inject(PLATFORM_ID);
+
   currentYear: number;
 
-  constructor(
-    private dataService: PortfolioDataService,
-    @Inject(PLATFORM_ID) private platformId: object
-  ) {
-    this.currentYear = isPlatformBrowser(this.platformId) 
-      ? new Date().getFullYear() 
+  constructor() {
+    this.currentYear = isPlatformBrowser(this.platformId)
+      ? new Date().getFullYear()
       : new Date().getFullYear();
   }
 

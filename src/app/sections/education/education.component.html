@@ -1,13 +1,13 @@
 <section id="education" class="education section">
   <div class="education-container">
     <div class="education-header">
-      <h2 class="section-title">Education & Certifications</h2>
+      <h2 class="section-title heading-gradient">Education & Certifications</h2>
     </div>
 
     <div class="education-grid" @staggerIn>
       <div class="education-column">
         <h3 class="column-title">Education</h3>
-        <div *ngFor="let edu of education" class="edu-item">
+        <div *ngFor="let edu of education" class="edu-item" appScrollReveal data-stagger="1">
           <h4 class="edu-degree">{{ edu.degree }}</h4>
           <p class="edu-institution">{{ edu.institution }}</p>
           <span class="edu-period">{{ edu.period }}</span>

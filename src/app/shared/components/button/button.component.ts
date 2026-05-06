@@ -15,8 +15,8 @@ export type ButtonSize = 'sm' | 'md' | 'lg';
 export class ButtonComponent {
   @Input() variant: ButtonVariant = 'primary';
   @Input() size: ButtonSize = 'md';
-  @Input() href: string = '';
-  @Input() disabled: boolean = false;
+  @Input() href = '';
+  @Input() disabled = false;
 
   get classes(): string {
     return cn(

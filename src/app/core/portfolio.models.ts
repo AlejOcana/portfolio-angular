@@ -12,6 +12,7 @@ export interface PersonalInfo {
 
 export interface ImpactMetric {
   value: string;
+  numericValue?: number;
   label: string;
   description: string;
 }
@@ -56,7 +57,7 @@ export interface Project {
   stack: string[];
   metrics: string;
   highlights: string[];
-  demoUrl: string;
+  demoUrl?: string;
   githubUrl: string;
   comingSoon?: boolean;
 }

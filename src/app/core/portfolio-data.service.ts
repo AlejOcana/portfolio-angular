@@ -37,21 +37,25 @@ Open to remote opportunities where I can contribute to meaningful projects.`,
     return [
       {
         value: '10+',
+        numericValue: 10,
         label: 'Years Experience',
         description: 'Building web applications since 2016',
       },
       {
         value: '4',
+        numericValue: 4,
         label: 'Companies Led',
         description: 'Engineering and project leadership roles',
       },
       {
         value: '10+',
+        numericValue: 10,
         label: 'Developers Mentored',
         description: 'Through frontend chapter coordination',
       },
       {
         value: 'Remote',
+        numericValue: NaN,
         label: 'Work Ready',
         description: 'Flexible for international opportunities',
       },

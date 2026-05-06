@@ -1,4 +1,4 @@
-import { Component, HostListener, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, HostListener, PLATFORM_ID, inject } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser, CommonModule } from '@angular/common';
 import { IconComponent } from '../icon/icon.component';
 
@@ -7,13 +7,14 @@ import { IconComponent } from '../icon/icon.component';
   standalone: true,
   imports: [CommonModule, IconComponent],
   templateUrl: './scroll-to-top.component.html',
-  styleUrls: ['./scroll-to-top.component.scss']
+  styleUrls: ['./scroll-to-top.component.scss'],
 })
 export class ScrollToTopComponent {
+  private document = inject<Document>(DOCUMENT);
+  private platformId = inject(PLATFORM_ID);
+
   isVisible = false;
   private threshold = 400;
-
-  constructor(@Inject(DOCUMENT) private document: Document, @Inject(PLATFORM_ID) private platformId: object) {}
 
   @HostListener('window:scroll')
   onScroll(): void {

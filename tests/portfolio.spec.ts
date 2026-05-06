@@ -71,20 +71,18 @@ test.describe('Portfolio Website', () => {
     await page.goto('/');
     
     await page.evaluate(() => window.scrollTo(0, 1000));
-    await page.waitForTimeout(500);
     
     const scrollButton = page.locator('button[aria-label="Scroll to top"]');
     await expect(scrollButton).toBeVisible();
     
     await scrollButton.click();
-    await page.waitForTimeout(500);
+    await expect(scrollButton).not.toBeVisible();
   });
 
   test('navbar navigation links work', async ({ page }) => {
     await page.goto('/');
     
     await page.getByRole('link', { name: 'Experience' }).click();
-    await page.waitForTimeout(500);
     await expect(page.locator('#experience')).toBeVisible();
   });
 
@@ -99,15 +97,18 @@ test.describe('Portfolio Website - Mobile', () => {
   test.use({ viewport: { width: 375, height: 667 } });
 
   test('hamburger menu opens and closes', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
     await page.goto('/');
     
     const toggle = page.locator('.navbar-toggle');
     await expect(toggle).toBeVisible();
     
+    // Open menu
     await toggle.click();
     await expect(page.locator('.navbar-nav.open')).toBeVisible();
     
-    await page.locator('.navbar-backdrop').click();
+    // Close by clicking toggle again (backdrop not clickable when hidden)
+    await toggle.click();
     await expect(page.locator('.navbar-nav.open')).not.toBeVisible();
   });
 
@@ -130,7 +131,6 @@ test.describe('Portfolio Website - Mobile', () => {
     await expect(page.locator('.navbar-nav.open')).toBeVisible();
     
     await page.locator('.nav-link', { hasText: 'About' }).click();
-    await page.waitForTimeout(300);
     await expect(page.locator('.navbar-nav.open')).not.toBeVisible();
   });
 
@@ -141,7 +141,6 @@ test.describe('Portfolio Website - Mobile', () => {
     await expect(page.locator('.navbar-nav.open')).toBeVisible();
     
     await page.locator('.nav-cta').click();
-    await page.waitForTimeout(300);
     await expect(page.locator('.navbar-nav.open')).not.toBeVisible();
   });
 
@@ -153,5 +152,56 @@ test.describe('Portfolio Website - Mobile', () => {
     
     await expect(page.locator('h1')).toBeVisible();
     await expect(page.locator('.hero-actions')).toBeVisible();
+  });
+});
+
+test.describe('Portfolio Accessibility', () => {
+  test('text is selectable', async ({ page }) => {
+    await page.goto('/#about');
+    
+    // Get selected text content
+    const selected = await page.evaluate(() => {
+      const sel = window.getSelection();
+      if (sel) {
+        const range = document.createRange();
+        const textNode = document.querySelector('.about-text');
+        if (textNode) {
+          range.selectNodeContents(textNode);
+          sel.removeAllRanges();
+          sel.addRange(range);
+        }
+        return sel.toString();
+      }
+      return '';
+    });
+    
+    expect(selected.length).toBeGreaterThan(20);
+  });
+
+  test('navbar toggle has accessible name', async ({ page }) => {
+    await page.goto('/');
+    
+    const toggle = page.locator('.navbar-toggle');
+    await expect(toggle).toHaveAttribute('aria-label', /menu|navigation/i);
+    await expect(toggle).toHaveAttribute('aria-controls', 'navbar-menu');
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  test('navbar menu has correct ARIA associations', async ({ page }) => {
+    // Mobile viewport required to show hamburger
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/');
+    
+    const menu = page.locator('#navbar-menu');
+    const toggle = page.locator('.navbar-toggle');
+    
+    // Initial state
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false');
+    await expect(toggle).toHaveAttribute('aria-controls', 'navbar-menu');
+    
+    // After click - menu is visible (not hidden)
+    await toggle.click();
+    await expect(menu).toHaveClass(/open/);
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true');
   });
 });

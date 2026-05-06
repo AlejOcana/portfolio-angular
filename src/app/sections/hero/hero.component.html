@@ -1,11 +1,11 @@
 <section id="top" class="hero">
   <div class="hero-container">
     <div class="hero-content" @fadeInUp>
-      <h1 class="hero-title">{{ personalInfo.name }}</h1>
-      <p class="hero-subtitle">{{ personalInfo.title }}</p>
-      <p class="hero-tagline" [class.typing]="isTyping">{{ displayedSubtitle() }}<span class="cursor" [class.hidden]="!isTyping">|</span></p>
+      <h1 class="hero-title gradient-text" appScrollReveal data-animation="fade-up" data-stagger="1">{{ personalInfo.name }}</h1>
+      <p class="hero-subtitle" appScrollReveal data-animation="fade-up" data-stagger="2">{{ personalInfo.title }}</p>
+      <p class="hero-tagline" [class.typing]="isTyping" appScrollReveal data-animation="fade-up" data-stagger="3">{{ displayedSubtitle() }}<span class="cursor" [class.hidden]="!isTyping">|</span></p>
       
-      <div class="hero-actions">
+      <div class="hero-actions" appScrollReveal data-animation="fade-up" data-stagger="4">
         <button class="btn-primary" (click)="scrollToProjects()">
           View Projects
           <app-icon name="arrowRight" [size]="18"></app-icon>
@@ -16,19 +16,19 @@
       </div>
     </div>
 
-    <div class="hero-terminal" @fadeInUp>
+    <div class="hero-terminal" @fadeInUp appScrollReveal data-animation="slide-right" data-stagger="5">
       <div class="terminal-header">
         <span class="terminal-dot"></span>
         <span class="terminal-dot"></span>
         <span class="terminal-dot"></span>
       </div>
-<div class="terminal-body">
-  <pre><code><span class="terminal-keyword">const</span> <span class="terminal-var">developer</span> = {{ '{' }}
-  <span class="terminal-property">name</span>: <span class="terminal-string">"{{ personalInfo.name }}"</span>,
-  <span class="terminal-property">title</span>: <span class="terminal-string">"{{ personalInfo.title }}"</span>,
-  <span class="terminal-property">location</span>: <span class="terminal-string">"{{ personalInfo.location }}"</span>
+      <div class="terminal-body">
+        <pre><code><span class="terminal-keyword">const</span> <span class="terminal-var">developer</span> = {{ '{' }}
+          <span class="terminal-property">name</span>: <span class="terminal-string">"{{ personalInfo.name }}"</span>,
+          <span class="terminal-property">title</span>: <span class="terminal-string">"{{ personalInfo.title }}"</span>,
+          <span class="terminal-property">location</span>: <span class="terminal-string">"{{ personalInfo.location }}"</span>
 {{ '}' }}</code></pre>
-</div>
+      </div>
     </div>
 
     <button class="hero-scroll" (click)="scrollDown()" aria-label="Scroll down">

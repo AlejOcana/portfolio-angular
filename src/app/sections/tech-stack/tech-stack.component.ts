@@ -1,32 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { trigger, style, animate, transition, stagger, query } from '@angular/animations';
 import { PortfolioDataService } from '../../core/portfolio-data.service';
 import { TechStack, TechStackCategory } from '../../core/portfolio.models';
+import { ScrollRevealDirective } from '../../shared/directives/scroll-reveal.directive';
 
 @Component({
   selector: 'app-tech-stack',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ScrollRevealDirective],
   templateUrl: './tech-stack.component.html',
   styleUrls: ['./tech-stack.component.scss'],
   animations: [
     trigger('staggerIn', [
       transition(':enter', [
-        query('.stack-category', [
-          style({ opacity: 0, transform: 'translateY(20px)' }),
-          stagger(100, [
-            animate('0.5s ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
-          ])
-        ], { optional: true })
-      ])
-    ])
-  ]
+        query(
+          '.stack-category',
+          [
+            style({ opacity: 0, transform: 'translateY(20px)' }),
+            stagger(100, [
+              animate('0.5s ease-out', style({ opacity: 1, transform: 'translateY(0)' })),
+            ]),
+          ],
+          { optional: true },
+        ),
+      ]),
+    ]),
+  ],
 })
 export class TechStackComponent implements OnInit {
-  techStack!: TechStack;
+  private dataService = inject(PortfolioDataService);
 
-  constructor(private dataService: PortfolioDataService) {}
+  techStack!: TechStack;
 
   ngOnInit(): void {
     this.techStack = this.dataService.getTechStack();
@@ -38,7 +43,7 @@ export class TechStackComponent implements OnInit {
       this.techStack.backend,
       this.techStack.database,
       this.techStack.devops,
-      this.techStack.emerging
+      this.techStack.emerging,
     ];
   }
 }

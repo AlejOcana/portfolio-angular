@@ -1,8 +1,16 @@
 <section id="impact" class="impact">
   <div class="impact-container">
+    <div class="impact-header">
+      <h2 class="section-title heading-gradient">Impact Metrics</h2>
+    </div>
     <div class="impact-grid">
-      <div *ngFor="let metric of metrics; let i = index" class="impact-card" @fadeIn [style.animation-delay]="(i * 100) + 'ms'">
-        <span class="impact-value">{{ metric.value }}</span>
+      <div *ngFor="let metric of metrics; let i = index" class="impact-card" appScrollReveal data-stagger="1" @fadeIn [style.animation-delay]="(i * 100) + 'ms'">
+        <span class="impact-value">
+          <app-animated-counter 
+            [target]="metric.numericValue || 0" 
+            [explicitSuffix]="getSuffix(metric)" 
+          />
+        </span>
         <span class="impact-label">{{ metric.label }}</span>
         <span class="impact-desc">{{ metric.description }}</span>
       </div>
