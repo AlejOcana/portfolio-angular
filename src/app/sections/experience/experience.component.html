@@ -5,19 +5,23 @@
     </div>
 
     <div class="timeline" @staggerIn>
-      <div *ngFor="let exp of experience; let last = last" class="experience-item" appScrollReveal data-stagger="1">
-        <div class="timeline-dot"></div>
-        <div class="timeline-content">
-          <div class="exp-header">
-            <h3 class="exp-company">{{ exp.company }}</h3>
-            <span class="exp-period">{{ exp.period }}</span>
+      @for (exp of experience; track exp.company) {
+        <div class="experience-item" appScrollReveal data-stagger="1">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="exp-header">
+              <h3 class="exp-company">{{ exp.company }}</h3>
+              <span class="exp-period">{{ exp.period }}</span>
+            </div>
+            <p class="exp-role">{{ exp.role }}</p>
+            <ul class="exp-highlights">
+              @for (highlight of exp.highlights; track highlight) {
+                <li>{{ highlight }}</li>
+              }
+            </ul>
           </div>
-          <p class="exp-role">{{ exp.role }}</p>
-          <ul class="exp-highlights">
-            <li *ngFor="let highlight of exp.highlights">{{ highlight }}</li>
-          </ul>
         </div>
-      </div>
+      }
     </div>
   </div>
 </section>

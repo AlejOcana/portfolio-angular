@@ -93,6 +93,116 @@ test.describe('Portfolio Website', () => {
   });
 });
 
+test.describe('SEO Metadata', () => {
+  test('has Open Graph meta tags', async ({ page }) => {
+    await page.goto('/');
+    
+    const ogTitle = page.locator('meta[property="og:title"]');
+    const ogDescription = page.locator('meta[property="og:description"]');
+    const ogType = page.locator('meta[property="og:type"]');
+    const ogLocale = page.locator('meta[property="og:locale"]');
+    
+    await expect(ogTitle).toHaveAttribute('content', /Alejandro/);
+    await expect(ogDescription).toHaveAttribute('content', /Senior Full-Stack Engineer/);
+    await expect(ogType).toHaveAttribute('content', 'profile');
+    await expect(ogLocale).toHaveAttribute('content', 'en_ES');
+  });
+
+  test('has Twitter Card meta tags', async ({ page }) => {
+    await page.goto('/');
+    
+    const twitterCard = page.locator('meta[name="twitter:card"]');
+    const twitterTitle = page.locator('meta[name="twitter:title"]');
+    const twitterDesc = page.locator('meta[name="twitter:description"]');
+    
+    await expect(twitterCard).toHaveAttribute('content', 'summary');
+    await expect(twitterTitle).toHaveAttribute('content', /Alejandro/);
+    await expect(twitterDesc).toHaveAttribute('content', /Senior Full-Stack Engineer/);
+  });
+
+  test('has theme-color meta tags', async ({ page }) => {
+    await page.goto('/');
+    
+    const themeColorDark = page.locator('meta[name="theme-color"]:not([media])');
+    const themeColorLight = page.locator('meta[name="theme-color"][media*="light"]');
+    
+    await expect(themeColorDark).toHaveAttribute('content', '#09090b');
+    await expect(themeColorLight).toHaveAttribute('content', '#fafafa');
+  });
+
+  test('has JSON-LD Person schema', async ({ page }) => {
+    await page.goto('/');
+    
+    const jsonLd = page.locator('script[type="application/ld+json"]');
+    await expect(jsonLd).toBeAttached();
+    
+    const content = await jsonLd.textContent();
+    const parsed = JSON.parse(content || '{}');
+    
+    expect(parsed['@context']).toBe('https://schema.org');
+    expect(parsed['@type']).toBe('Person');
+    expect(parsed.name).toBe('Alejandro Ocaña Garcia');
+    expect(parsed.jobTitle).toBe('Senior Full-Stack Engineer');
+    expect(parsed.url).toContain('github.com');
+  });
+
+  test('has required meta description', async ({ page }) => {
+    await page.goto('/');
+    
+    const description = page.locator('meta[name="description"]');
+    await expect(description).toHaveAttribute('content', /Senior Full-Stack Engineer/);
+  });
+});
+
+test.describe('Link Integrity', () => {
+  test('no links with empty href', async ({ page }) => {
+    await page.goto('/');
+    
+    const emptyLinks = page.locator('a[href=""]');
+    expect(await emptyLinks.count()).toBe(0);
+  });
+
+  test('no links with href about:blank', async ({ page }) => {
+    await page.goto('/');
+    
+    const blankLinks = page.locator('a[href="about:blank"]');
+    expect(await blankLinks.count()).toBe(0);
+  });
+
+  test('external links have rel="noopener noreferrer"', async ({ page }) => {
+    await page.goto('/');
+    
+    // Find all external links (excluding same-origin)
+    const externalLinks = page.locator('a[href^="http"]:not([href*="localhost"]):not([href^="/"])');
+    const count = await externalLinks.count();
+    
+    for (let i = 0; i < count; i++) {
+      const link = externalLinks.nth(i);
+      const rel = await link.getAttribute('rel');
+      expect(rel).toContain('noopener');
+      expect(rel).toContain('noreferrer');
+    }
+  });
+
+  test('all anchor tags have valid href', async ({ page }) => {
+    await page.goto('/');
+    
+    const links = page.locator('a');
+    const count = await links.count();
+    
+    for (let i = 0; i < count; i++) {
+      const link = links.nth(i);
+      const href = await link.getAttribute('href');
+      const text = await link.textContent();
+      
+      // Links should have href (may be empty for scroll anchors)
+      if (text && text.trim().length > 0) {
+        expect(href).toBeTruthy();
+      }
+    }
+  });
+});
+
 test.describe('Portfolio Website - Mobile', () => {
   test.use({ viewport: { width: 375, height: 667 } });
 

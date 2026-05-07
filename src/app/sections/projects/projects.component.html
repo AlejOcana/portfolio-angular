@@ -5,48 +5,68 @@
     </div>
 
     <div class="projects-grid" @staggerIn>
-      <div *ngFor="let project of projects" class="project-card" appScrollReveal data-stagger="1" [class.coming-soon]="project.comingSoon">
-        <div class="project-header">
-          <h3 class="project-name">{{ project.name }}</h3>
-          <span *ngIf="project.comingSoon" class="coming-badge">Coming Soon</span>
-        </div>
-        <p class="project-tagline">{{ project.tagline }}</p>
-        <p class="project-description">{{ project.description }}</p>
-        
-        <div class="project-stack" *ngIf="!project.comingSoon">
-          <span *ngFor="let tech of project.stack" class="tech-tag">{{ tech }}</span>
-        </div>
-        
-        <div class="project-metrics" *ngIf="!project.comingSoon">
-          <span class="metric-label">Metrics:</span>
-          <span class="metric-value">{{ project.metrics }}</span>
-        </div>
+      @for (project of projects; track project.id) {
+        <div class="project-card" appScrollReveal data-stagger="1" [class.coming-soon]="project.comingSoon">
+          <div class="project-header">
+            <h3 class="project-name">{{ project.name }}</h3>
+            @if (project.comingSoon) {
+              <span class="coming-badge">Coming Soon</span>
+            }
+          </div>
+          <p class="project-tagline">{{ project.tagline }}</p>
+          <p class="project-description">{{ project.description }}</p>
+          
+          @if (!project.comingSoon) {
+            <div class="project-stack">
+              @for (tech of project.stack; track tech) {
+                <span class="tech-tag">{{ tech }}</span>
+              }
+            </div>
+          }
+          
+          @if (!project.comingSoon) {
+            <div class="project-metrics">
+              <span class="metric-label">Metrics:</span>
+              <span class="metric-value">{{ project.metrics }}</span>
+            </div>
+          }
 
-        <div class="project-highlights" *ngIf="!project.comingSoon">
-          <h4>Key Highlights:</h4>
-          <ul>
-            <li *ngFor="let highlight of project.highlights">{{ highlight }}</li>
-          </ul>
-        </div>
+          @if (!project.comingSoon) {
+            <div class="project-highlights">
+              <h4>Key Highlights:</h4>
+              <ul>
+                @for (highlight of project.highlights; track highlight) {
+                  <li>{{ highlight }}</li>
+                }
+              </ul>
+            </div>
+          }
 
-        <div class="project-links" *ngIf="!project.comingSoon && project.id !== 'portfolio'">
-          <a *ngIf="project.demoUrl" [href]="project.demoUrl" target="_blank" rel="noopener noreferrer" class="project-link">
-            <app-icon name="external" [size]="16"></app-icon>
-            Demo
-          </a>
-          <a [href]="project.githubUrl" target="_blank" rel="noopener noreferrer" class="project-link">
-            <app-icon name="github" [size]="16"></app-icon>
-            Code
-          </a>
-        </div>
+          @if (!project.comingSoon && project.id !== 'portfolio') {
+            <div class="project-links">
+              @if (project.demoUrl) {
+                <a [href]="project.demoUrl" target="_blank" rel="noopener noreferrer" class="project-link">
+                  <app-icon name="external" [size]="16"></app-icon>
+                  Demo
+                </a>
+              }
+              <a [href]="project.githubUrl" target="_blank" rel="noopener noreferrer" class="project-link">
+                <app-icon name="github" [size]="16"></app-icon>
+                Code
+              </a>
+            </div>
+          }
 
-        <div class="project-links" *ngIf="!project.comingSoon && project.id === 'portfolio'">
-          <a [href]="project.githubUrl" target="_blank" rel="noopener noreferrer" class="project-link">
-            <app-icon name="github" [size]="16"></app-icon>
-            Code
-          </a>
+          @if (!project.comingSoon && project.id === 'portfolio') {
+            <div class="project-links">
+              <a [href]="project.githubUrl" target="_blank" rel="noopener noreferrer" class="project-link">
+                <app-icon name="github" [size]="16"></app-icon>
+                Code
+              </a>
+            </div>
+          }
         </div>
-      </div>
+      }
     </div>
   </div>
 </section>

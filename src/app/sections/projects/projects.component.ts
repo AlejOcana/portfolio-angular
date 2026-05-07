@@ -1,5 +1,4 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { trigger, style, animate, transition, stagger, query } from '@angular/animations';
 import { IconComponent } from '../../shared/components/icon/icon.component';
 import { PortfolioDataService } from '../../core/portfolio-data.service';
@@ -9,7 +8,7 @@ import { ScrollRevealDirective } from '../../shared/directives/scroll-reveal.dir
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [CommonModule, IconComponent, ScrollRevealDirective],
+  imports: [IconComponent, ScrollRevealDirective],
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.scss'],
   animations: [

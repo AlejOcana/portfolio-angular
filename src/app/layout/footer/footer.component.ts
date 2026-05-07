@@ -1,12 +1,12 @@
 import { Component, PLATFORM_ID, inject } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { IconComponent } from '../../shared/components/icon/icon.component';
 import { PortfolioDataService } from '../../core/portfolio-data.service';
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [CommonModule, IconComponent],
+  imports: [IconComponent],
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
 })

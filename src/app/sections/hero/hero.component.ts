@@ -1,5 +1,5 @@
 import { Component, PLATFORM_ID, signal, OnInit, inject } from '@angular/core';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { trigger, style, animate, transition, stagger, query } from '@angular/animations';
 import { IconComponent } from '../../shared/components/icon/icon.component';
 import { ScrollRevealDirective } from '../../shared/directives/scroll-reveal.directive';
@@ -8,7 +8,7 @@ import { PortfolioDataService } from '../../core/portfolio-data.service';
 @Component({
   selector: 'app-hero',
   standalone: true,
-  imports: [CommonModule, IconComponent, ScrollRevealDirective],
+  imports: [IconComponent, ScrollRevealDirective],
   templateUrl: './hero.component.html',
   styleUrls: ['./hero.component.scss'],
   animations: [

@@ -1,5 +1,4 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { trigger, style, animate, transition, stagger, query } from '@angular/animations';
 import { PortfolioDataService } from '../../core/portfolio-data.service';
 import { TechStack, TechStackCategory } from '../../core/portfolio.models';
@@ -8,7 +7,7 @@ import { ScrollRevealDirective } from '../../shared/directives/scroll-reveal.dir
 @Component({
   selector: 'app-tech-stack',
   standalone: true,
-  imports: [CommonModule, ScrollRevealDirective],
+  imports: [ScrollRevealDirective],
   templateUrl: './tech-stack.component.html',
   styleUrls: ['./tech-stack.component.scss'],
   animations: [

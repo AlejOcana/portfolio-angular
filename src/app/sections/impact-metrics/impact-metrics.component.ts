@@ -1,5 +1,4 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { trigger, style, animate, transition } from '@angular/animations';
 import { PortfolioDataService } from '../../core/portfolio-data.service';
 import { ImpactMetric } from '../../core/portfolio.models';
@@ -9,7 +8,7 @@ import { AnimatedCounterComponent } from '../../shared/components/animated-count
 @Component({
   selector: 'app-impact-metrics',
   standalone: true,
-  imports: [CommonModule, ScrollRevealDirective, AnimatedCounterComponent],
+  imports: [ScrollRevealDirective, AnimatedCounterComponent],
   templateUrl: './impact-metrics.component.html',
   styleUrls: ['./impact-metrics.component.scss'],
   animations: [

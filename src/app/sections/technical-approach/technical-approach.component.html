@@ -6,10 +6,12 @@
     </div>
 
     <div class="approach-grid" @staggerIn>
-      <div *ngFor="let principle of principles" class="approach-card" appScrollReveal data-stagger="1">
-        <h3 class="card-title">{{ principle.title }}</h3>
-        <p class="card-description">{{ principle.description }}</p>
-      </div>
+      @for (principle of principles; track principle.title) {
+        <div class="approach-card" appScrollReveal data-stagger="1">
+          <h3 class="card-title">{{ principle.title }}</h3>
+          <p class="card-description">{{ principle.description }}</p>
+        </div>
+      }
     </div>
   </div>
 </section>

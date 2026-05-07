@@ -7,18 +7,22 @@
     <div class="education-grid" @staggerIn>
       <div class="education-column">
         <h3 class="column-title">Education</h3>
-        <div *ngFor="let edu of education" class="edu-item" appScrollReveal data-stagger="1">
-          <h4 class="edu-degree">{{ edu.degree }}</h4>
-          <p class="edu-institution">{{ edu.institution }}</p>
-          <span class="edu-period">{{ edu.period }}</span>
-          <p class="edu-desc">{{ edu.description }}</p>
-        </div>
+        @for (edu of education; track edu.degree) {
+          <div class="edu-item" appScrollReveal data-stagger="1">
+            <h4 class="edu-degree">{{ edu.degree }}</h4>
+            <p class="edu-institution">{{ edu.institution }}</p>
+            <span class="edu-period">{{ edu.period }}</span>
+            <p class="edu-desc">{{ edu.description }}</p>
+          </div>
+        }
       </div>
 
       <div class="certifications-column">
         <h3 class="column-title">Certifications</h3>
         <ul class="cert-list">
-          <li *ngFor="let cert of certifications" class="cert-item">{{ cert }}</li>
+          @for (cert of certifications; track cert) {
+            <li class="cert-item">{{ cert }}</li>
+          }
         </ul>
       </div>
     </div>
