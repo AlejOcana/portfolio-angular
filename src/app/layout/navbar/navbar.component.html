@@ -5,17 +5,25 @@
     </a>
 
     <nav class="navbar-nav" id="navbar-menu" [class.open]="isMenuOpen()">
+      <div class="drawer-header">
+        <span>Menu</span>
+        <button class="drawer-close" (click)="closeMenu()" aria-label="Close menu">
+          <app-icon name="x" [size]="24"></app-icon>
+        </button>
+      </div>
       @for (link of navLinks; track link.href) {
-        <a 
+        <a
           [href]="link.href"
           class="nav-link"
           (click)="closeMenu()"
         >
-          {{ link.label }}
+          <app-icon [name]="link.icon" [size]="20"></app-icon>
+          <span>{{ link.label }}</span>
         </a>
       }
       <button class="nav-cta" (click)="scrollToContact()">
-        Get in Touch
+        <app-icon name="send" [size]="20"></app-icon>
+        <span>Get in Touch</span>
       </button>
     </nav>
 
