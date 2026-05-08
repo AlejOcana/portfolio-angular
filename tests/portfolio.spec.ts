@@ -265,6 +265,102 @@ test.describe('Portfolio Website - Mobile', () => {
   });
 });
 
+test.describe('Mobile Menu Positioning', () => {
+  test.use({ viewport: { width: 375, height: 667 } });
+
+  test('covers full viewport when opened at scroll position 0', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/');
+    
+    await page.locator('.navbar-toggle').click();
+    await expect(page.locator('.navbar-nav.open')).toBeVisible();
+    await page.waitForTimeout(100); // wait for transition
+    
+    // Verify position: fixed covers the viewport using getBoundingClientRect
+    // The key test: the menu must be positioned at the viewport edges (top=0, left=0)
+    // regardless of scroll position. The width is intentionally 85% via CSS.
+    const rect = await page.evaluate(() => {
+      const el = document.querySelector('.navbar-nav.open');
+      if (!el) return null;
+      const r = el.getBoundingClientRect();
+      return { top: r.top, left: r.left, bottom: r.bottom, right: r.right, width: r.width };
+    });
+    expect(rect).not.toBeNull();
+    // position: fixed must anchor to viewport, not the header
+    expect(rect!.top).toBeLessThanOrEqual(1);  // <= 0 (with 1px tolerance)
+    expect(rect!.left).toBeLessThanOrEqual(1); // <= 0
+    // width should be the CSS 85% of viewport (with scrollbar deduction on some platforms)
+    // The key thing: left edge at 0, right edge > 0
+    expect(rect!.right).toBeGreaterThan(0);  // menu has non-zero width
+    expect(rect!.width).toBeGreaterThan(300); // at least 85% of 375px viewport
+  });
+
+  test('covers full viewport when opened while scrolled', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/');
+    
+    await page.evaluate(() => window.scrollTo(0, 300));
+    await page.waitForTimeout(200); // wait for scrolled class to apply
+    await page.locator('.navbar-toggle').click();
+    await page.waitForTimeout(100); // wait for transition
+    
+    const rect = await page.evaluate(() => {
+      const el = document.querySelector('.navbar-nav.open');
+      if (!el) return null;
+      const r = el.getBoundingClientRect();
+      return { top: r.top, left: r.left, bottom: r.bottom, right: r.right };
+    });
+    expect(rect).not.toBeNull();
+    // The key test: even after scrolling, the menu must cover the full viewport
+    // NOT be positioned relative to the header
+    expect(rect!.top).toBeLessThanOrEqual(1);
+    expect(rect!.left).toBeLessThanOrEqual(1);
+    expect(rect!.bottom).toBeGreaterThanOrEqual(666);
+  });
+
+  test('menu stays open when scrolled after opening', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/');
+    
+    await page.locator('.navbar-toggle').click();
+    await expect(page.locator('.navbar-nav.open')).toBeVisible();
+    
+    // Scroll while menu is open - menu should stay open
+    await page.evaluate(() => window.scrollTo(0, 300));
+    await page.waitForTimeout(100);
+    
+    // Verify menu is still open and positioned correctly
+    const rect = await page.evaluate(() => {
+      const el = document.querySelector('.navbar-nav.open');
+      if (!el) return null;
+      const r = el.getBoundingClientRect();
+      return { top: r.top, left: r.left, bottom: r.bottom, right: r.right };
+    });
+    expect(rect).not.toBeNull();
+    expect(rect!.top).toBeLessThanOrEqual(1);
+    expect(rect!.left).toBeLessThanOrEqual(1);
+  });
+
+  test('menu toggle works at scroll position 0 and scrolled', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto('/');
+    
+    // At scroll 0
+    await page.locator('.navbar-toggle').click();
+    await expect(page.locator('.navbar-nav.open')).toBeVisible();
+    await page.locator('.navbar-toggle').click();
+    await expect(page.locator('.navbar-nav.open')).not.toBeVisible();
+    
+    // At scroll 300
+    await page.evaluate(() => window.scrollTo(0, 300));
+    await page.waitForTimeout(200);
+    await page.locator('.navbar-toggle').click();
+    await expect(page.locator('.navbar-nav.open')).toBeVisible();
+    await page.locator('.navbar-toggle').click();
+    await expect(page.locator('.navbar-nav.open')).not.toBeVisible();
+  });
+});
+
 test.describe('Portfolio Accessibility', () => {
   test('text is selectable', async ({ page }) => {
     await page.goto('/#about');
